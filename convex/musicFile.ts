@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 export const generateFileUploadUrl = mutation({
     handler: async (ctx) => {
@@ -14,5 +14,12 @@ export const sendFile = mutation({
             id: args.storageId,
             artistName: args.artistName
         })
+    }
+})
+
+export const files = query({
+    handler: async (ctx) => {
+        const files = await ctx.db.query('musics').collect()
+        return files
     }
 })
